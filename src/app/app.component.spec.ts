@@ -16,10 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'djjam-frontend'`, () => {
+  it(`should have as title 'djjam-pro-frontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('djjam-frontend');
+    expect(app.title).toEqual('djjam-pro-frontend');
   });
 
   it('should render title', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'djjam-frontend app is running!',
+      'djjam-pro-frontend app is running!',
     );
   });
 });
