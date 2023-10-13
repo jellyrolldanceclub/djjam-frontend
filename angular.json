@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "djjam-frontend": {
+    "djjam-pro-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -58,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "djjam-frontend:build:production"
+              "browserTarget": "djjam-pro-frontend:build:production"
             },
             "development": {
-              "browserTarget": "djjam-frontend:build:development"
+              "browserTarget": "djjam-pro-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -69,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "djjam-frontend:build"
+            "browserTarget": "djjam-pro-frontend:build"
           }
         },
         "test": {
