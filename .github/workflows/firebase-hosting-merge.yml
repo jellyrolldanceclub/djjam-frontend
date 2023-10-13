@@ -3,15 +3,12 @@
 
 name: Deploy to Firebase Hosting on merge
 on:
-  workflow_run:
-    workflows: [Tests]
-    branches: [develop]
-    types:
-      - completed
+  push:
+    branches:
+      - develop
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: dev
     steps:
       - uses: actions/checkout@v3
