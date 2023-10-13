@@ -1,4 +1,5 @@
 build
+.github
 coverage
 node_modules
 package.json
