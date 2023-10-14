@@ -1,26 +1,37 @@
 name: Tests and Coverage
 on: push
 jobs:
-  test-and-coverage:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Run tests
+        run: npm run test-headless
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: coverage/report-lcov/lcov.info
+          retention-days: 7
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
-
-    - name: Install dependencies
-      run: npm ci --ignore-scripts
-
-    - name: Run tests
-      run: npm run test-headless
-
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  sonarcloud:
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: actions/download-artifact@v3
+        with:
+          name: code-coverage-report
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
