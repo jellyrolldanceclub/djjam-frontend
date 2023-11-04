@@ -1,1 +1,7 @@
-<p>playlist-search works!</p>
+<div>
+  <app-playlist-search-filter></app-playlist-search-filter>
+  <app-playlist-search-table
+    [playlists]="playlists"
+    [totalItems]="totalPlaylists"
+  ></app-playlist-search-table>
+</div>
