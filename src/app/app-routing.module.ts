@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.PlaylistSearchModule,
       ),
   },
+  {
+    path: 'playlists/:id',
+    loadChildren: () =>
+      import('./pages/playlist-detail/playlist-detail.module').then(
+        (m) => m.PlaylistDetailModule,
+      ),
+  },
 ];
 
 @NgModule({
